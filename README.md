@@ -1,10 +1,10 @@
-# Juniper SRX Audit
+# Juniper SNMP Migrations
 
 This example will show how to use the PyEZ plugin for Nornir to
 
 1. build a NETCONF connection to a remote device
-2. request policy match information
-3. report any firewall policies that do not have a match
+2. validate that SNMPv3 is not running
+3. configure SNMPv3 parameters
 4. close the connection
 
 ## 🚀 Workflow
