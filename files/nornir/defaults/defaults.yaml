@@ -1,6 +1,6 @@
   
 ---
 firewalls:
-    username: 'automation'
-    password: 'juniper123'
-    platform: junos
+  username: 'automation'
+  password: 'aikr8Am_bg!vppd'
+  platform: junos

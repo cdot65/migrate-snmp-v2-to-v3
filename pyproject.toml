@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "srx-audit"
+name = "snmpv3_config"
 version = "0.1.0"
-description = "Audit your SRX with the PyEZ plugin for Nornir"
+description = "Configure SNMPv3 with the PyEZ plugin for Nornir"
 authors = ["Calvin Remsburg"]
 license = "Apache2.0"
 

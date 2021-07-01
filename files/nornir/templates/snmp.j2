@@ -1,0 +1,22 @@
+{% for each in config.snmp.v3.user %}
+set snmp v3 usm local-engine user {{ each.name }} {{ each.authentication }} authentication-password {{ each.authentication_pass }} 
+set snmp v3 usm local-engine user {{ each.name }} {{ each.privacy }} privacy-password {{ each.privacy_pass }}
+{% endfor %}
+
+{% for each in config.snmp.v3.vacm.security_model %}
+set snmp v3 vacm security-to-group security-model usm security-name {{ each.name }} group {{ each.group }}
+{% endfor %}
+
+{% for each in config.snmp.v3.vacm.access %}
+{% for view in each.security_level %}
+set snmp v3 vacm access group {{ each.name }} default-context-prefix security-model usm security-level {{ view.name }} read-view {{ view.read_view }}
+set snmp v3 vacm access group {{ each.name }} default-context-prefix security-model usm security-level {{ view.name }} write-view {{ view.write_view }}
+set snmp v3 vacm access group {{ each.name }} default-context-prefix security-model usm security-level {{ view.name }} notify-view {{ view.notify_view }}
+{% endfor %}
+{% endfor %}
+
+set snmp engine-id {{ config.snmp.engine_id }}
+
+{% for each in config.snmp.view %}
+set snmp view {{ each.name }} oid {{ each.oid }} include 
+{% endfor %}

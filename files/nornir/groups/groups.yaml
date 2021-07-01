@@ -1,5 +1,39 @@
 ---
 firewalls:
-    data:
-        dns_server: '192.168.101.10'
-        ntp_server: '192.168.106.254'
+  data:
+    dns_server: "192.168.101.10"
+    ntp_server: "192.168.106.254"
+    snmp:
+      v3:
+        user:
+          - name: "SPACE"
+            authentication: "authentication-sha"
+            authentication_pass: "SpacePassw0rdAUTH"
+            privacy: "privacy-aes128"
+            privacy_pass: "SpacePassw0rdPriv"
+          - name: "LIBRENMS"
+            authentication: "authentication-md5"
+            authentication_key: "LibreNM$Passw0rdAUTH"
+            privacy: "privacy-aes128"
+            privacy_key: "LibreNM$Passw0rdPriv"
+        vacm:
+          security_model:
+            - name: "LIBRENMS"
+              group: "HOME-LAB-GROUP"
+            - name: "SPACE"
+              group: "HOME-LAB-GROUP"
+          access:
+            - name: "HOME-LAB-GROUP"
+              security_level:
+                - name: "privacy"
+                  read_view: "HOME-LAB-VIEW"
+                  write_view: "HOME-LAB-VIEW"
+                  notify_view: "HOME-LAB-VIEW"
+      engine_id: "use-mac-address"
+      view:
+        - name: "HOME-LAB-VIEW"
+          oid: "internet"
+      client_list:
+        - name: "home"
+          client_address_list: 
+            - name: "192.168.105.9/32"
